@@ -86,6 +86,56 @@ class HashMap {
         this.buckets[index].splice(entryIndex, 1);
         return true;
     }
+
+    length() {
+        let count = 0;
+        for (let arr of this.buckets) {
+            if (arr) {
+                count += arr.length;
+            }
+        }
+        return count;
+    }
+
+    clear() {
+        this.buckets = new Array(this.capacity).fill(null);
+    }
+
+    keys() {
+        let keys = [];
+        for (let arr of this.buckets) {
+            if (arr) {
+                for (let entry of arr) {
+                    keys.push(entry.key);
+                }
+            }
+        }
+        return keys;
+    }
+
+    values() {
+        let values = [];
+        for (let arr of this.buckets) {
+            if (arr) {
+                for (let entry of arr) {
+                    values.push(entry.value);
+                }
+            }
+        }
+        return values;
+    }
+
+    entries() {
+        let entries = [];
+        for (let arr of this.buckets) {
+            if (arr) {
+                for (let entry of arr) {
+                    entries.push([entry.key, entry.value]);
+                }
+            }
+        }
+        return entries;
+    }
 }
 
 module.exports = HashMap;

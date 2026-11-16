@@ -40,6 +40,70 @@ it("removes elements", () => {
     test.set('lion', 'golden');
 
     expect(test.remove('jacket')).toBe(false);
-    test.remove('dog');
-    expect(test.get('dog')).toBe(true);
+    expect(test.remove('dog')).toBe(true);
+    expect(test.remove('dog')).toBe(false);
+});
+
+it("checks length ", () => {
+    const test = new HashMap();
+    test.set('dog', 'brown');
+    test.set('lion', 'golden');
+    test.set('cat', 'orange');
+    test.set('crow', 'black');
+    test.set('dragon', 'red');
+    test.set('lizard', 'green');
+    test.set('whale', 'blue');
+    test.set('bird', 'grey');
+
+    expect(test.length()).toBe(8);
+});
+
+it("clears the bucket", () => {
+    const test = new HashMap();
+    test.set('dog', 'brown');
+    test.set('lion', 'golden');
+    expect(test.length()).toBe(2);
+    test.clear();
+    expect(test.length()).toBe(0);
+});
+
+it("returns an array of all keys", () => {
+    const test = new HashMap();
+    expect(test.keys()).toEqual([]);
+    test.set('dog', 'brown');
+    test.set('lion', 'golden');
+    test.set('cat', 'orange');
+    const keys = test.keys();
+    expect(keys).toHaveLength(3);
+    expect(keys).toEqual(expect.arrayContaining(['dog', 'lion', 'cat']));
+});
+
+it("returns an array of all values", () => {
+    const test = new HashMap();
+    expect(test.values()).toEqual([]);
+    test.set('dog', 'brown');
+    test.set('lion', 'golden');
+    test.set('cat', 'orange');
+
+    const values = test.values();
+
+    expect(values).toHaveLength(3);
+    expect(values).toEqual(expect.arrayContaining(['brown', 'golden', 'orange']));
+});
+
+it("returns an array of key-value pair arrays", () => {
+    const test = new HashMap();
+    expect(test.entries()).toEqual([]);
+    test.set('dog', 'brown');
+    test.set('lion', 'golden');
+
+    const entries = test.entries();
+
+    expect(entries).toHaveLength(2);
+    expect(entries).toEqual(
+        expect.arrayContaining([
+            ['dog', 'brown'],
+            ['lion', 'golden']
+        ])
+    );
 });
